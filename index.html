@@ -6,6 +6,7 @@
     <title>Areeba Abdul Razzaq | Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
 </head>
 <body>
     <nav id="navbar">
@@ -150,7 +151,8 @@
                 </a>
             </div>
             
-       <form action="https://formsubmit.co/areebaabdulrazzaq06@gmail.com" method="POST">
+<form id="contactForm" action="https://formsubmit.co/areebaabdulrazzaq06@gmail.com" method="POST">
+    <!-- Form fields -->
     <div class="form-group">
         <input type="text" id="name" name="name" placeholder="Your Name" required>
     </div>
@@ -160,8 +162,12 @@
     <div class="form-group">
         <textarea id="message" name="message" placeholder="Your Message" required></textarea>
     </div>
-    <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
+    
+    <!-- FormSubmit settings -->
     <input type="hidden" name="_subject" value="New Contact Form Submission">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="text" name="_honey" style="display:none">
+    
     <button type="submit" class="btn">Send Message</button>
 </form>
 
@@ -170,5 +176,12 @@
     </footer>
 
     <script src="script.js"></script>
+            <div id="successModal" class="modal">
+    <div class="modal-content">
+        <h3>Success! 🎉</h3>
+        <p>Your message has been sent successfully! I'll get back to you soon.</p>
+        <button class="modal-close">OK</button>
+    </div>
+</div>
 </body>
 </html>
