@@ -7,6 +7,54 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
+    <style>
+        /* Temporary inline CSS for timeline - add to your styles.css later */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 3px solid #4CAF50;
+        }
+        
+        .timeline-content h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .timeline-content h4 {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-content ul {
+            padding-left: 20px;
+        }
+        
+        .timeline-content li {
+            margin-bottom: 8px;
+        }
+    </style>
 </head>
 <body>
     <nav id="navbar">
@@ -21,7 +69,7 @@
 
     <section id="welcome-section">
         <h1>Hi, I'm Areeba Abdul Razzaq</h1>
-        <p>Computer Science Student | Software Engineer | HR Professional</p>
+        <p>Computer Science Student | Looking for Roles that Aligns with my exepertise</p>
         <div class="quote">
             <p>"Just as water adapts to its surroundings, I am a highly adaptable and flexible professional..."</p>
         </div>
@@ -31,7 +79,7 @@
         <h2>About Me</h2>
         <div class="about-content">
             <div class="about-text">
-                <p>I'm a Computer Science student at Igra University with a Higher Diploma in Software Engineering from Aptech Learning Center. My professional journey combines technical expertise with human resources experience, making me a versatile candidate in the tech industry.</p>
+                <p>I'm a Computer Science student at Iqra University with a Higher Diploma in Software Engineering from Aptech Learning Center.Aiming to get roles in tec filed like front end or as a software engineert or in it Sectore these three are my intersest</p>
                 
                 <h3>Skills</h3>
                 <div class="skills-container">
@@ -66,7 +114,7 @@
     </section>
 
     <section id="experience">
-        <h2>Professional Experience</h2>
+        <h2>Internship Experience</h2>
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-date">Dec 2024</div>
@@ -76,22 +124,12 @@
                     <ul>
                         <li>Conducted a three-day training session on Power Automate and UiPath</li>
                         <li>Delivered comprehensive, hands-on sessions to enhance automation proficiency</li>
+                        <li>Done under my University FYP Supervisor</li>
                     </ul>
                 </div>
             </div>
             
-            <div class="timeline-item">
-                <div class="timeline-date">Feb 2024 - Present</div>
-                <div class="timeline-content">
-                    <h3>Human Resources Intern</h3>
-                    <h4>GaoTek Inc, Karachi, Pakistan</h4>
-                    <ul>
-                        <li>Screened resumes, conducted interviews, and provided guidance to candidates</li>
-                        <li>Developed strong skills in talent acquisition and human resources</li>
-                        <li>Gained deep understanding of the tech industry</li>
-                    </ul>
-                </div>
-            </div>
+            <!-- Add more timeline items here if needed -->
         </div>
     </section>
 
@@ -99,9 +137,9 @@
         <h2>Education</h2>
         <div class="education-container">
             <div class="education-item">
-                <h3>Igra University, Karachi</h3>
+                <h3>Iqra University, Karachi</h3>
                 <p>Bachelor's Degree in Computer Science (CGPA: 3.12)</p>
-                <p>Expected June 2025 | 7th Semester</p>
+                <p>Graduated in June 2025</p>
             </div>
             <div class="education-item">
                 <h3>Aptech Learning Center, Karachi</h3>
@@ -120,68 +158,64 @@
             </div>
         </div>
     </section>
-
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <div class="contact-container">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Location</h3>
-                    <p>Karachi, Pakistan</p>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Email</h3>
-                    <p>areebaabdulrazzaq06@gmail.com</p>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <h3>Phone</h3>
-                    <p>+92 312 2868633</p>
-                </div>
-            </div>
-            
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="social-btn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://github.com/areeba-png" target="_blank" class="social-btn">
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
-            
-<form id="contactForm" action="https://formsubmit.co/areebaabdulrazzaq06@gmail.com" method="POST">
-    <!-- Form fields -->
-    <div class="form-group">
+<section id="contact">
+  <h2>Contact Me</h2>
+  <div class="contact-container">
+    <!-- Contact Form -->
+    <form id="contactForm" action="https://formsubmit.co/areebaabdulrazzaq06@gmail.com" method="POST">
+      <div class="form-group">
         <input type="text" id="name" name="name" placeholder="Your Name" required>
-    </div>
-    <div class="form-group">
+      </div>
+      <div class="form-group">
         <input type="email" id="email" name="email" placeholder="Your Email" required>
-    </div>
-    <div class="form-group">
+      </div>
+      <div class="form-group">
         <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+      </div>
+      <input type="hidden" name="_subject" value="New Contact Form Submission">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none">
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+
+    <!-- Contact Details (Icons with hover tooltips) -->
+    <div class="contact-details">
+      <div class="contact-info">
+        <div class="contact-icon" data-tooltip="Karachi, Pakistan">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="contact-icon" data-tooltip="areebaabdulrazzaq06@gmail.com">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="contact-icon" data-tooltip="+92 312 2868633">
+          <i class="fas fa-phone"></i>
+        </div>
+      </div>
+      
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="social-btn" data-tooltip="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://github.com/areeba-png" target="_blank" class="social-btn" data-tooltip="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
     </div>
-    
-    <!-- FormSubmit settings -->
-    <input type="hidden" name="_subject" value="New Contact Form Submission">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="text" name="_honey" style="display:none">
-    
-    <button type="submit" class="btn">Send Message</button>
-</form>
+  </div>
+</section>
 
     <footer>
         <p>&copy; 2024 Areeba Abdul Razzaq. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
-            <div id="successModal" class="modal">
-    <div class="modal-content">
-        <h3>Success! 🎉</h3>
-        <p>Your message has been sent successfully! I'll get back to you soon.</p>
-        <button class="modal-close">OK</button>
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <h3>Success! 🎉</h3>
+            <p>Your message has been sent successfully! I'll get back to you soon.</p>
+            <button class="modal-close">OK</button>
+        </div>
     </div>
-</div>
+
+    <script src="script.js"></script>
 </body>
 </html>
