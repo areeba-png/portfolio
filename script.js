@@ -18,7 +18,38 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
         });
     });
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = e.target;
     
+    // Simple validation
+    if (!form.name.value || !form.email.value || !form.message.value) {
+        alert('Please fill all fields');
+        return;
+    }
+
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form)
+    })
+    .then(response => {
+        if (response.ok) {
+            // Show success modal
+            document.getElementById('successModal').style.display = 'flex';
+            form.reset();
+        } else {
+            alert('Error sending message. Please try again.');
+        }
+    })
+    .catch(error => {
+        alert('Network error. Please check your connection.');
+    });
+});
+
+// Close modal
+document.querySelector('.modal-close').addEventListener('click', function() {
+    document.getElementById('successModal').style.display = 'none';
+});
     // Highlight active navigation item on scroll
     window.addEventListener('scroll', function() {
         const scrollPosition = window.scrollY;
