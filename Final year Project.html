@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo-Spatial Data Analysis | FYP Showcase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        
+        :root {
+            --primary: #2e7d32;
+            --secondary: #1b5e20;
+            --accent: #8bc34a;
+            --dark: #263238;
+            --light: #f1f8e9;
+            --form-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--form-bg);
+            color: var(--dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .achievement-stamp {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            width: 300px;
+            height: 300px;
+            background-image: url('https://i.imgur.com/JR7kFUl.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0;
+            z-index: 1000;
+            pointer-events: none;
+            animation: stampAnimation 4s ease-in-out forwards;
+        }
+        
+        @keyframes stampAnimation {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+            30% { transform: translate(-50%, -50%) scale(1); }
+            80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 30px;
+        }
+        
+        .left-column {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            animation: fadeInLeft 0.8s ease-out;
+        }
+        
+        .right-column {
+            width: 350px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            animation: fadeInRight 0.8s ease-out;
+        }
+        
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .project-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .project-title::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            bottom: -8px;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-header:hover .project-title::after {
+            transform: scaleX(1);
+        }
+        
+        .project-subtitle {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .project-header:hover .project-subtitle {
+            letter-spacing: 0.5px;
+        }
+        
+        .award-badge {
+            display: inline-block;
+            background-color: #ffd700;
+            color: #8a6d3b;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease;
+        }
+        
+        .award-badge:hover {
+            transform: rotate(-5deg) scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .team-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem auto;
+            max-width: 1000px;
+            padding: 0 1rem;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .team-member {
+            text-align: center;
+            width: 180px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            perspective: 1000px;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+        
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: white;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 3px solid var(--accent);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+        
+        .team-member:hover .member-avatar {
+            border-color: var(--secondary);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transform: rotateY(15deg);
+        }
+        
+        .member-name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover .member-name {
+            color: var(--primary);
+            letter-spacing: 0.5px;
+        }
+        
+        .member-role {
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover .member-role {
+            transform: scale(1.05);
+        }
+        
+        .member-contact {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .project-details {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .section-title:hover::after {
+            width: 100%;
+        }
+        
+        /* Enhanced Video Section */
+        .video-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .video-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(46,125,50,0.2) 0%, rgba(139,195,74,0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .video-container:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .video-container:hover::before {
+            opacity: 1;
+        }
+        
+        .video-container h3 {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.8rem;
+            margin: 0;
+            font-size: 1rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .video-container:hover h3 {
+            letter-spacing: 0.5px;
+        }
+        
+        .video-wrapper {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-wrapper:hover {
+            background: #e0e0e0;
+        }
+
+        video {
+            border-radius: 4px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        video:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .video-play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(46, 125, 50, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            opacity: 1;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        video[poster] + .video-play-button {
+            opacity: 1;
+        }
+
+        video:not([poster]) + .video-play-button {
+            display: none;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            width: 100%;
+            justify-content: center;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.4);
+        }
+        
+        .btn:hover::before {
+            left: 0;
+        }
+        
+        .github-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            width: 100%;
+            justify-content: center;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .github-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #555, #333);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+        
+        .github-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(51, 51, 51, 0.4);
+        }
+        
+        .github-btn:hover::before {
+            left: 0;
+        }
+        
+        .project-explanation {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .project-explanation:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+        }
+        
+        .project-explanation ul li {
+            transition: all 0.3s ease;
+            padding-left: 5px;
+        }
+        
+        .project-explanation ul li:hover {
+            transform: translateX(5px);
+            color: var(--primary);
+        }
+        
+        .demo-section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .demo-section:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+        }
+        
+        .form-section {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .form-section:hover {
+            border-bottom-color: var(--accent);
+        }
+        
+        .form-title {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .form-title:hover {
+            letter-spacing: 0.5px;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .tech-item {
+            position: relative;
+            text-align: center;
+            perspective: 1000px;
+            z-index: 1;
+        }
+
+        .tech-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            filter: grayscale(30%);
+            transform-style: preserve-3d;
+        }
+
+        .tech-logo:hover {
+            transform: rotateY(20deg) scale(1.1);
+            filter: grayscale(0%) drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+        }
+
+        .tech-tooltip {
+            z-index: 10; 
+            visibility: hidden;
+            width: 140px;
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%) rotateX(-20deg);
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform-origin: bottom center;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+        }
+
+        .tech-item:hover .tech-tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) rotateX(0deg);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from { 
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }   
+        .logo-container {
+            position: absolute;
+            top: 20px;
+    left: 300px;
+    z-index: 100;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    border: 3px solid var(--accent);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* This class will be added/removed with JavaScript */
+.logo-zoomed {
+    transform: scale(1.5); /* 50% larger when clicked */
+    position: relative;
+    z-index: 1000; /* Ensure it appears above other content */
+}
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .right-column {
+                width: auto;
+            }
+            
+            .project-title {
+                font-size: 2rem;
+            }
+            
+            .project-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .team-member {
+                width: 140px;
+            }
+            
+            .member-avatar {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+            
+            .achievement-stamp {
+                width: 200px;
+                height: 200px;
+            }
+
+            .tech-stack {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .video-wrapper {
+                min-height: 200px;
+                padding: 15px;
+            }
+            
+            video {
+                max-width: 100%;
+            }
+            
+            .logo-container {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .logo {
+                width: 60px;
+                height: 60px;
+            }
+            
+            /* Video Section Styles */
+            .video-section {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+                margin: 2rem 0;
+            }
+            
+            .video-container {
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                transition: all 0.3s ease;
+            }
+            
+            .video-container:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            }
+            
+            .video-container h3 {
+                background: linear-gradient(to right, #2e7d32, #1b5e20);
+                color: white;
+                padding: 0.8rem;
+                margin: 0;
+                font-size: 1rem;
+            }
+            
+            .video-wrapper {
+                position: relative;
+                background: #f5f5f5;
+                cursor: pointer;
+                min-height: 250px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            video {
+                width: 100%;
+                display: block;
+                background: #000;
+            }
+            
+            .video-play-button {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 60px;
+                height: 60px;
+                background-color: rgba(46, 125, 50, 0.8);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 24px;
+                transition: all 0.3s ease;
+                z-index: 2;
+            }
+            
+            /* Hide play button when video is playing */
+            video.playing + .video-play-button {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo with Animation -->
+    <div class="logo-container">
+        <img src="images/White Green and Black Line Art Earth Illustrative Nature Think Green Logo.png" alt="Project Logo" class="logo">
+    </div>
+    <!-- Achievement Stamp Animation -->
+    <div class="achievement-stamp"></div>
+    
+    <!-- Project Header -->
+    <div class="project-header">
+        <h1 class="project-title">Geo-Spatial Data Analysis</h1>
+        <h2 class="project-subtitle">Sindh Vegetation Monitoring System</h2>
+<div class="award-badge" onclick="window.open('https://www.facebook.com/share/p/1NRZFKVWLL/', '_blank')">
+    <i class="fas fa-trophy"></i> Awarded 2nd Position at QUEST & Featured on Iqra University's Official Page <i class="fas fa-external-link-alt" style="font-size: 0.8em; margin-left: 5px;"></i>
+</div>
+    </div>
+    
+    <div class="container">
+        <!-- Left Column -->
+        <div class="left-column">
+            <!-- Team Section -->
+            <div class="team-section">
+                <!-- Team Member 1 -->
+                <div class="team-member">
+                    <div class="member-avatar" style="background-color: #e8f5e9;">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 class="member-name">Shermeen Zubair</h3>
+                    <p class="member-role">System Architect</p>
+                    
+                </div>
+                
+                <!-- Team Member 3 - Areeba -->
+                <div class="team-member">
+                    <div class="member-avatar" style="background-color: #e8f5e9; border-color: var(--secondary);">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 class="member-name">Areeba A. Razzaq</h3>
+                    <p class="member-role">Backend Developer</p>
+        
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="team-member">
+                    <div class="member-avatar" style="background-color: #e8f5e9;">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 class="member-name">Shumail H. Khan</h3>
+                    <p class="member-role">Frontend Developer</p>
+
+                </div>
+            </div>
+            
+            <!-- Project Explanation -->
+            <div class="project-explanation">
+                <h2 class="section-title">Project Explanation</h2>
+                <p>Our Final Year Project titled "Geo-Spatial Data Analysis over Sindh Region" is a web-based platform that utilizes geo-spatial data and satellite imagery to track vegetation, non-vegetation land, and vegetation health across Sindh province.</p>
+                
+                <h2 class="section-title">Key Features</h2>
+                <ul>
+                    <li>Calculates environmental indices like NDVI and LAI</li>
+                    <li>Provides real-time vegetation analysis without technical skills</li>
+                    <li>Allows users to upload GeoJSON files and choose timeframes</li>
+                    <li>Delivers depth visualizations of vegetation health and land change</li>
+                    <li>Serves farmers, researchers, and policymakers</li>
+                </ul>
+            </div>
+            
+            <!-- Project Videos Section -->
+            <div class="video-section">
+                <h2 class="section-title">Project Videos</h2>
+                
+                <!-- Explanation Video -->
+                <div class="video-container">
+                    <h3><i class="fas fa-play-circle"></i> Project Explanation</h3>
+                    <div class="video-wrapper">
+                        <video id="explanationVideo" width="100%" controls poster="https://via.placeholder.com/800x450">
+                            <source src="Video/Animated video.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
+                        <div class="video-play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Demo Video -->
+                <div class="video-container">
+                    <h3><i class="fas fa-laptop-code"></i> Working Demo</h3>
+                    <div class="video-wrapper">
+                        <video id="demoVideo" width="100%" controls poster="https://via.placeholder.com/800x450">
+                            <source src="Video/working video.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
+                        <div class="video-play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Acknowledgements -->
+            <div class="form-section">
+                <h2 class="section-title">Acknowledgements</h2>
+                <p>We acknowledge the guidance of our supervisor Dr. Mirza Adnan Baig, support from HOD Dr. Saad Ahmed, and the Department of Computer Science at Iqra University. We also thank our families for their constant support.</p>
+            </div>
+        </div>
+        
+        <!-- Right Column -->
+        <div class="right-column">
+            <div class="demo-section">
+                <h2 class="form-title">Project Demo</h2>
+                <p>Experience our Sindh Vegetation Monitoring System with this interactive demo.</p>
+                
+                <button class="btn" onclick="openLiveDemo()">
+                    <i class="fas fa-external-link-alt"></i> View Live Demo
+                </button>
+                
+                <button class="github-btn" onclick="window.open('https://github.com/areeba-png/Final-Year-Project.git', '_blank')">
+                    <i class="fab fa-github"></i> View on GitHub
+                </button>
+                
+                <div style="margin-top: 30px;">
+                    <h3 class="form-title">Tech Stack</h3>
+                    <div class="tech-stack">
+                        <!-- Google Earth Engine -->
+                        <div class="tech-item">
+                            <img src="https://earthengine.google.com/static/images/earth-engine-logo.png" alt="Google Earth Engine" class="tech-logo">
+                            <span class="tech-tooltip">Google Earth Engine: Cloud-based geospatial processing</span>
+                        </div>
+                        
+                        <!-- Python -->
+                        <div class="tech-item">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png" alt="Python" class="tech-logo">
+                            <span class="tech-tooltip">Python: Core backend logic & data analysis</span>
+                        </div>
+                        
+                        <!-- Streamlit -->
+                        <div class="tech-item">
+                            <img src="https://streamlit.io/images/brand/streamlit-mark-color.png" alt="Streamlit" class="tech-logo">
+                            <span class="tech-tooltip">Streamlit: Web app framework for interactive UI</span>
+                        </div>
+                        
+                        <!-- Folium/Leaflet -->
+                        <div class="tech-item">
+                            <img src="https://leafletjs.com/docs/images/logo.png" alt="Leaflet.js" class="tech-logo">
+                            <span class="tech-tooltip">Folium/Leaflet.js: Interactive map visualizations</span>
+                        </div>
+                        
+                        <!-- GeoJSON -->
+                        <div class="tech-item">
+                            <img src="https://plugins.jetbrains.com/files/26592/724922/icon/default.svg" alt="GeoJSON" class="tech-logo">
+                            <span class="tech-tooltip">GeoJSON: User-defined area inputs</span>
+                        </div>
+                        
+                        <!-- Chart.js -->
+                        <div class="tech-item">
+                            <img src="https://www.chartjs.org/img/chartjs-logo.svg" alt="Chart.js" class="tech-logo">
+                            <span class="tech-tooltip">Chart.js: Data visualization & analytics</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <h3 class="form-title">Project Timeline</h3>
+                    <div style="background: #f5f5f5; padding: 15px; border-radius: 5px;">
+                        <p><strong>Phase 1:</strong> Research & Planning (2 months)</p>
+                        <p><strong>Phase 2:</strong> Development (4 months)</p>
+                        <p><strong>Phase 3:</strong> Testing & Refinement (2 months)</p>
+                        <p><strong>Phase 4:</strong> Deployment (15 Days)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function openLiveDemo() {
+            alert("The live demo will be available soon! Currently in development.");
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create and show achievement stamp
+            const stamp = document.querySelector('.achievement-stamp');
+            
+            // Remove stamp after animation completes
+            setTimeout(() => {
+                stamp.remove();
+            }, 4000);
+            
+            // Add floating animation to tech logos
+            const techLogos = document.querySelectorAll('.tech-logo');
+            techLogos.forEach((logo, index) => {
+                logo.style.animation = `float 3s ease-in-out ${index * 0.2}s infinite`;
+            });
+            
+            // Video Player Functionality
+            const explanationVideo = document.getElementById('explanationVideo');
+            const demoVideo = document.getElementById('demoVideo');
+            
+            // Setup for explanation video
+            setupVideo(explanationVideo);
+            
+            // Setup for demo video
+            setupVideo(demoVideo);
+            
+            function setupVideo(videoElement) {
+                const wrapper = videoElement.parentElement;
+                const playButton = wrapper.querySelector('.video-play-button');
+                
+                // Click on wrapper to play/pause
+                wrapper.addEventListener('click', function(e) {
+                    // Only trigger if not clicking on controls
+                    if (!e.target.classList.contains('video-play-button') && e.target.tagName !== 'VIDEO') {
+                        if (videoElement.paused) {
+                            videoElement.play();
+                            videoElement.classList.add('playing');
+                        } else {
+                            videoElement.pause();
+                            videoElement.classList.remove('playing');
+                        }
+                    }
+                });
+                
+                // Play button click
+                playButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    videoElement.play();
+                    videoElement.classList.add('playing');
+                });
+                
+                // Video state changes
+                videoElement.addEventListener('play', function() {
+                    videoElement.classList.add('playing');
+                });
+                
+                videoElement.addEventListener('pause', function() {
+                    videoElement.classList.remove('playing');
+                });
+                
+                videoElement.addEventListener('ended', function() {
+                    videoElement.classList.remove('playing');
+                });
+            }
+
+            // Animate elements when they come into view
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.form-section, .video-container, .team-member, .project-explanation, .demo-section');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+            
+            // Set initial state
+            document.querySelectorAll('.form-section, .video-container, .team-member, .project-explanation, .demo-section').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease-out';
+            });
+            
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on load
+        });
+    </script>
+</body>
+</html>
