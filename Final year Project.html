@@ -27,22 +27,6 @@
             padding: 0;
         }
         
-        .achievement-stamp {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.5);
-            width: 300px;
-            height: 300px;
-            background-image: url('https://i.imgur.com/JR7kFUl.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0;
-            z-index: 1000;
-            pointer-events: none;
-            animation: stampAnimation 4s ease-in-out forwards;
-        }
         
         @keyframes stampAnimation {
             0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
@@ -757,8 +741,6 @@
     <div class="logo-container">
         <img src="images/White Green and Black Line Art Earth Illustrative Nature Think Green Logo.png" alt="Project Logo" class="logo">
     </div>
-    <!-- Achievement Stamp Animation -->
-    <div class="achievement-stamp"></div>
     
     <!-- Project Header -->
     <div class="project-header">
